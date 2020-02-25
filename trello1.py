@@ -12,7 +12,8 @@ class Trello:
         url = "https://api.trello.com/1/boards/"
         querystring = {"name":board_name,"defaultLabels":"true","defaultLists":"true","keepFromSource":"none","prefs_permissionLevel":"private","prefs_voting":"disabled","prefs_comments":"members","prefs_invitations":"members","prefs_selfJoin":"true","prefs_cardCovers":"true","prefs_background":"blue","prefs_cardAging":"regular","key":api_key,"token":token}
         response = requests.request("POST", url, params=querystring,verify=False)
-
+        
+#Function to get the BoardID
     def get_boardID(self,api_key,token,board_name):
         url = "https://api.trello.com/1/members/me/boards"
         querystring = {"key": api_key, "token":token}
@@ -22,7 +23,8 @@ class Trello:
         for i in r:
             dict1.update({i['name']: i['id']})
         return dict1[board_name]
-
+    
+#Function to add a list to board
     def add_list(self,board_ID,List_name,api_key,token):
         url = "https://api.trello.com/1/lists"
         querystring = {"name": List_name, "idBoard": board_ID, "key": api_key, "token": token}
